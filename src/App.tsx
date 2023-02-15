@@ -51,7 +51,6 @@ function App() {
           </Route>
           <Route path="/profile" element={<Profile />} />
           <Route path="/saved" element={<Saved />} />
-          <Route path="test" element={<Test />} />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>
