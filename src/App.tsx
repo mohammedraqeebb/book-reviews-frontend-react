@@ -17,7 +17,7 @@ import CreateAuthor from './pages/author/create';
 import CreatePublisher from './pages/publisher/create';
 import Profile from './pages/profile';
 import Saved from './pages/saved';
-import Test from './pages/test';
+
 import usePortal from './hooks/use-portal';
 import NotFound from './pages/not-found';
 
