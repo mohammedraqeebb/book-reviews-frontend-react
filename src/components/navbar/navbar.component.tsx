@@ -2,7 +2,7 @@ import React, { FC, useEffect, useState, MouseEvent } from 'react';
 import styles from './Navbar.module.scss';
 
 import { Link, useLocation } from 'react-router-dom';
-('next/router');
+
 import HomeActiveIcon from '../../static/assets/icons/home-active.icon ';
 import NavLink from '../navlink/navlink.component';
 import HomeIcon from '../../static/assets/icons/home.icon';
