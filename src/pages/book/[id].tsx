@@ -289,33 +289,31 @@ const BookDetails = () => {
   });
   const clickLikeEvent = async (event: MouseEvent) => {
     event.stopPropagation();
-    await addLikeRequest();
     if (user) {
       dispatch({ type: 'ADD_LIKE' });
     }
+    await addLikeRequest();
   };
   const removeLikeEvent = async (event: MouseEvent) => {
     event.stopPropagation();
-    await removeLikeRequest();
     if (user) {
       dispatch({ type: 'REMOVE_LIKE' });
     }
+    await removeLikeRequest();
   };
   const clickDislikeEvent = async (event: MouseEvent) => {
     event.stopPropagation();
-
-    await addDislikeRequest();
     if (user) {
       dispatch({ type: 'ADD_DISLIKE' });
     }
+    await addDislikeRequest();
   };
   const removeDislikeEvent = async (event: MouseEvent) => {
     event.stopPropagation();
-
-    await removeDislikeRequest();
     if (user) {
       dispatch({ type: 'REMOVE_DISLIKE' });
     }
+    await removeDislikeRequest();
   };
 
   const { doRequest: addCommentRequest, errors: addCommentRequestErrors } =

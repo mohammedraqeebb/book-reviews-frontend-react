@@ -19,6 +19,7 @@ import { isButtonDisabled } from '../../util/validation/enable-button';
 import ErrorComponent from '../../components/error.component';
 import { useNavigate } from 'react-router-dom';
 import { BACKEND_URL } from '../../main';
+import { CircularProgress } from '@mui/material';
 
 const INITIAL_SIGN_UP_FIELDS = {
   name: '',
@@ -119,7 +120,7 @@ const Signup = () => {
     await doRequest();
   };
 
-  const { doRequest, errors } = useRequest({
+  const { doRequest, errors, loading } = useRequest({
     url: `${BACKEND_URL}/auth/signup`,
     method: 'post',
     onSuccess: (data) => {
@@ -229,7 +230,11 @@ const Signup = () => {
             onClick={handleSubmit}
             width="100%"
           >
-            sign up
+            {loading ? (
+              <CircularProgress color="inherit" size={16} />
+            ) : (
+              'Sign up'
+            )}
           </Button>
         </form>
       </div>

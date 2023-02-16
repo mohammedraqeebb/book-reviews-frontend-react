@@ -1,3 +1,4 @@
+import { CircularProgress } from '@mui/material';
 import React, { ChangeEvent, FormEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from '../../components/button/button.component';
@@ -61,7 +62,7 @@ const CreatePublisher = () => {
     setPublisherFormFields({ ...publisherFormFields, [name]: value });
   };
 
-  const { doRequest, errors } = useRequest<Publisher>({
+  const { doRequest, errors, loading } = useRequest<Publisher>({
     url: `${BACKEND_URL}/publisher/create`,
     method: 'post',
     authenticated: true,
@@ -197,7 +198,11 @@ const CreatePublisher = () => {
           </div>
           {errors && <ErrorComponent errors={errors} />}
           <Button type="submit" onClick={handleSubmit} width="100%">
-            create publisher page
+            {loading ? (
+              <CircularProgress color="inherit" size={16} />
+            ) : (
+              'create publisher page'
+            )}
           </Button>
         </form>
       </div>

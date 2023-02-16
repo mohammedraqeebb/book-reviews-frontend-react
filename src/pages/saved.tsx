@@ -10,6 +10,7 @@ import { Book } from './search';
 import styles from '../styles/Saved.module.scss';
 import PageSkeleton from '../components/page-skeleton.component';
 import { BACKEND_URL } from '../main';
+import ErrorComponent from '../components/error.component';
 
 type SavedPageProps = {
   savedBooks: Book[];
@@ -17,10 +18,11 @@ type SavedPageProps = {
 
 const Saved = () => {
   const [savedBooks, setSavedBooks] = useState<Book[]>([]);
-  const [pageLoading, setPageLoading] = useState(true);
+
   const {
     doRequest: getAllSavedBooksRequest,
     errors: getAllSavedBooksRequestErrors,
+    loading: getAllSavedBooksRequestLoading,
   } = useRequest({
     url: `${BACKEND_URL}/book/saved/all`,
     method: 'post',
@@ -32,12 +34,11 @@ const Saved = () => {
   useEffect(() => {
     const fetchSavedBooks = async () => {
       await getAllSavedBooksRequest();
-      setPageLoading(false);
     };
     fetchSavedBooks();
   }, []);
 
-  if (pageLoading) {
+  if (getAllSavedBooksRequestLoading) {
     return (
       <div className={styles.saved_page_wrapper}>
         <div className={styles.saved_page_container}>
@@ -50,6 +51,9 @@ const Saved = () => {
     <div className={styles.saved_page_wrapper}>
       <div className={styles.saved_page_container}>
         <h3>Saved Books</h3>
+        {getAllSavedBooksRequestErrors && (
+          <ErrorComponent errors={getAllSavedBooksRequestErrors} />
+        )}
         <SavedBooksList books={savedBooks} />
       </div>
     </div>

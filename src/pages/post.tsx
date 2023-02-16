@@ -14,6 +14,7 @@ import { getToday } from '../util/validation/get-today';
 import ErrorComponent from '../components/error.component';
 import { BACKEND_URL } from '../main';
 import { Link, useNavigate } from 'react-router-dom';
+import { CircularProgress } from '@mui/material';
 
 type Author = {
   id: string;
@@ -123,21 +124,24 @@ const Post = () => {
     };
     fetchPublishers();
   }, [searchPublisherField]);
-  const { doRequest: submitBookRequest, errors: submitBookRequestErrors } =
-    useRequest<Publisher[]>({
-      url: `${BACKEND_URL}/book/create`,
-      method: 'post',
-      authenticated: true,
-      body: {
-        ...bookFormFields,
-        authorIds: authors.map((author) => author.id),
-        publisherId: publisher?.id,
-        genre: genre?.value,
-      },
-      onSuccess: (data) => {
-        router(`/book/${data.book.id}`);
-      },
-    });
+  const {
+    doRequest: submitBookRequest,
+    errors: submitBookRequestErrors,
+    loading: submitBookRequestLoading,
+  } = useRequest<Publisher[]>({
+    url: `${BACKEND_URL}/book/create`,
+    method: 'post',
+    authenticated: true,
+    body: {
+      ...bookFormFields,
+      authorIds: authors.map((author) => author.id),
+      publisherId: publisher?.id,
+      genre: genre?.value,
+    },
+    onSuccess: (data) => {
+      router(`/book/${data.book.id}`);
+    },
+  });
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
@@ -274,7 +278,11 @@ const Post = () => {
             <ErrorComponent errors={submitBookRequestErrors} />
           )}
           <Button onClick={handleSubmit} width="100%">
-            send for review and upload
+            {submitBookRequestLoading ? (
+              <CircularProgress color="inherit" size={16} />
+            ) : (
+              ' send for review and upload'
+            )}
           </Button>
         </form>
       </div>

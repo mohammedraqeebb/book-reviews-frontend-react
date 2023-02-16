@@ -1,3 +1,4 @@
+import { CircularProgress } from '@mui/material';
 import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Button from '../../components/button/button.component';
@@ -29,7 +30,7 @@ const ChangePassword = () => {
     password: false,
     confirmPassword: false,
   });
-  const { doRequest, errors } = useRequest({
+  const { doRequest, errors, loading } = useRequest({
     url: `${BACKEND_URL}/auth/changepassword`,
     method: 'post',
     onSuccess: () => {
@@ -156,7 +157,11 @@ const ChangePassword = () => {
             type="submit"
             width="100%"
           >
-            change password
+            {loading ? (
+              <CircularProgress color="inherit" size={16} />
+            ) : (
+              'change password'
+            )}
           </Button>
         </form>
       </div>

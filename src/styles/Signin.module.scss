@@ -30,6 +30,7 @@
         align-items: center;
         position: absolute;
         bottom: -1.5rem;
+        font-size: 1.2rem;
         color: $color_neutral_500;
         .signup_page_link {
           cursor: pointer;
@@ -43,6 +44,7 @@
         bottom: 3rem;
         color: $color_primary_700;
         font-weight: 800;
+        font-size: 0.8rem;
       }
       .password_input_container {
         position: relative;

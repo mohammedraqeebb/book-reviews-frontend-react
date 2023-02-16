@@ -20,6 +20,7 @@ import BookDetailsSearch from '../components/book-details-search/book-details-se
 import { useNavigate } from 'react-router-dom';
 import { BACKEND_URL } from '../main';
 import { CircularProgress } from '@mui/material';
+import ErrorComponent from '../components/error.component';
 
 const Profile = () => {
   const user = useAppSelector((state) => state.user.user);
@@ -129,6 +130,9 @@ const Profile = () => {
                   .toLocaleUpperCase()}
             </h2>
           </div>
+          {signOutRequestErrors && (
+            <ErrorComponent errors={signOutRequestErrors} />
+          )}
           <button className={styles.signout_button} onClick={handleSignout}>
             sign out
           </button>
@@ -158,6 +162,7 @@ const Profile = () => {
               >
                 change name
               </button>
+              {}
               <button
                 className={styles.name_change_cancel_button}
                 type="button"
@@ -165,6 +170,9 @@ const Profile = () => {
               >
                 cancel
               </button>
+              {nameChangeRequestErrors && (
+                <ErrorComponent errors={nameChangeRequestErrors} />
+              )}
             </form>
           )}
         </div>
@@ -206,7 +214,15 @@ const Profile = () => {
                 style={{ margin: '20px auto' }}
               />
             )}
-            {booksData.length > 0 &&
+            {getLikedBooksRequestErrors && (
+              <ErrorComponent errors={getLikedBooksRequestErrors} />
+            )}
+            {getViewedBooksRequestErrors && (
+              <ErrorComponent errors={getViewedBooksRequestErrors} />
+            )}
+            {!getLikedBooksRequestLoading &&
+              !getViewedBooksRequestLoading &&
+              booksData.length > 0 &&
               booksData.map((currentBook) => (
                 <BookDetailsSearch key={currentBook.id} {...currentBook} />
               ))}

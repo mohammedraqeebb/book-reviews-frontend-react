@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 
 import BooksList from '../components/books-list/books-list.component';
+import ErrorComponent from '../components/error.component';
 import HomePageSkeleton from '../components/home-page-skeleton.component';
 
 import useRequest from '../hooks/use-request';
@@ -15,6 +16,7 @@ const Home = () => {
   const [mostViewedBooks, setMostViewedBooks] = useState<Book[]>([]);
   const {
     doRequest: getMostLikedBooksRequest,
+    errors: getMostLikedBooksRequestErrors,
     loading: getMostLikedBooksRequestLoading,
   } = useRequest({
     url: `${BACKEND_URL}/book/likes/mostliked`,
@@ -25,6 +27,7 @@ const Home = () => {
   });
   const {
     doRequest: getMostViewedBooksRequest,
+    errors: getMostViewedBooksRequestErrors,
     loading: getMostViewedBooksRequestLoading,
   } = useRequest({
     url: `${BACKEND_URL}/book/views/mostViewed`,
@@ -56,6 +59,12 @@ const Home = () => {
     <>
       <div className={styles.home_page_wrapper}>
         <div className={styles.home_page_container}>
+          {getMostLikedBooksRequestErrors && (
+            <ErrorComponent errors={getMostLikedBooksRequestErrors} />
+          )}
+          {getMostViewedBooksRequestErrors && (
+            <ErrorComponent errors={getMostViewedBooksRequestErrors} />
+          )}
           <BooksList books={mostLikedBooks} listTitle="most liked books" />
           <BooksList books={mostViewedBooks} listTitle="most viewed books" />
         </div>

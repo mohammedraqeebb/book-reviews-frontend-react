@@ -1,3 +1,4 @@
+import { CircularProgress } from '@mui/material';
 import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from '../../components/button/button.component';
@@ -52,7 +53,7 @@ const CreateAuthor = () => {
       case 'name':
     }
   };
-  const { doRequest, errors } = useRequest<Author>({
+  const { doRequest, errors, loading } = useRequest<Author>({
     url: `${BACKEND_URL}/author/create`,
     method: 'post',
     body: { ...authorFormFields, gender: gender?.label },
@@ -121,7 +122,11 @@ const CreateAuthor = () => {
           />
           {errors && <ErrorComponent errors={errors} />}
           <Button type="submit" onClick={handleSubmit} width="100%">
-            create author page
+            {loading ? (
+              <CircularProgress color="inherit" size={16} />
+            ) : (
+              'create author page'
+            )}
           </Button>
         </form>
       </div>

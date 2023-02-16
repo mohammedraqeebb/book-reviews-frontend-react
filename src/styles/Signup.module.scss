@@ -23,6 +23,7 @@
       flex-direction: column;
       gap: 2rem;
       .signin_description {
+        font-size: 1.2rem;
         display: flex;
         gap: 0.4rem;
         justify-content: center;
@@ -30,11 +31,13 @@
         position: absolute;
         bottom: 3.2rem;
         left: 5px;
+        margin-top: 2rem;
         color: $color_neutral_500;
         .signin_page_link {
           color: $color_primary_700;
           font-weight: 800;
           text-decoration: underline;
+          cursor: pointer;
         }
       }
       .password_input_container {

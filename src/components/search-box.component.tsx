@@ -16,9 +16,6 @@ const SearchBox: FC<SearchBoxProps> = ({
 }) => {
   return (
     <div style={{ width, height }} className={styles.search_box_container}>
-      <span className={styles.search_icon}>
-        <AiOutlineSearch size={iconSize ?? 16} style={{ height: 'inherit' }} />
-      </span>
       <input className={styles.search_box} {...props} />
     </div>
   );

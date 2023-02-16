@@ -1,3 +1,4 @@
+import { CircularProgress } from '@mui/material';
 import React, { ChangeEvent, FormEvent, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Button from '../../components/button/button.component';
@@ -21,7 +22,7 @@ const ForgotPassword = () => {
     }
     setEmailValidationError(false);
   };
-  const { doRequest, errors } = useRequest({
+  const { doRequest, errors, loading } = useRequest({
     url: `${BACKEND_URL}/auth/forgotpassword`,
     method: 'post',
     body: { email },
@@ -40,7 +41,9 @@ const ForgotPassword = () => {
     <div className={styles.forgot_password_wrapper}>
       <div className={styles.forgot_password_form_wrapper}>
         <form onSubmit={handleSubmit} className={styles.form_container}>
-          <h5>Enter your registered email</h5>
+          <p className={styles.forgot_password_header}>
+            Enter your registered email
+          </p>
           <FormInputText
             autoComplete="off"
             hasError={emailValidationError}
@@ -67,7 +70,11 @@ const ForgotPassword = () => {
             type="submit"
             width="100%"
           >
-            Get OTP
+            {loading ? (
+              <CircularProgress color="inherit" size={16} />
+            ) : (
+              ' Get OTP'
+            )}
           </Button>
         </form>
       </div>

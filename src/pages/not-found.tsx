@@ -6,7 +6,7 @@ const NotFound = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       route('/');
-    }, 4000);
+    }, 2000);
     return () => clearTimeout(timer);
   }, []);
   return (

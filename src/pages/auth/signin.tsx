@@ -16,6 +16,7 @@ import ErrorComponent from '../../components/error.component';
 import usePortal from '../../hooks/use-portal';
 import { Link, useNavigate } from 'react-router-dom';
 import { BACKEND_URL } from '../../main';
+import { CircularProgress } from '@mui/material';
 
 const INITIAL_SIGN_IN_FIELDS = {
   email: '',
@@ -45,7 +46,7 @@ const Signin = ({}) => {
     }
   }, []);
   const [showPassword, setShowPassword] = useState(false);
-  const { doRequest, errors } = useRequest({
+  const { doRequest, errors, loading } = useRequest({
     url: `${BACKEND_URL}/auth/signin`,
     method: 'post',
     onSuccess: (data) => {
@@ -137,7 +138,11 @@ const Signin = ({}) => {
             onClick={handleSubmit}
             width="100%"
           >
-            sign in
+            {loading ? (
+              <CircularProgress color="inherit" size={16} />
+            ) : (
+              'Sign in'
+            )}
           </Button>
           <div className={styles.signup_description}>
             <p>Don&apos;t have an account? </p>

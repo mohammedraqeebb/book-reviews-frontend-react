@@ -9,6 +9,7 @@ import PortalMessageComponent from './components/portal-message.component';
 
 export const BACKEND_URL =
   'https://book-reviews-backend-latest.onrender.com/api';
+// export const BACKEND_URL = '/api';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>

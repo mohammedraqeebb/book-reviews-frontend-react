@@ -6,6 +6,8 @@ import useRequest from '../hooks/use-request';
 import BookDetailsSearch from '../components/book-details-search/book-details-search. component';
 import { BACKEND_URL } from '../main';
 import useDocumentTitle from '../hooks/use-document-title';
+import { CircularProgress } from '@mui/material';
+import ErrorComponent from '../components/error.component';
 export const Genre = [
   'biography',
   'personality development',
@@ -55,7 +57,7 @@ export const INITIAL_BOOK_DATA = {
 const Search = () => {
   const [bookSearchField, setBookSearchField] = useState('');
   const [books, setBooks] = useState<Book[]>([]);
-  const { doRequest, errors } = useRequest({
+  const { doRequest, errors, loading } = useRequest({
     url: `${BACKEND_URL}/book/search/all`,
     body: { bookSearchField },
     method: 'post',
@@ -65,7 +67,7 @@ const Search = () => {
   });
   const handleChange = async (event: ChangeEvent<HTMLInputElement>) => {
     setBookSearchField(event.target.value);
-    if (bookSearchField === '') {
+    if (event.target.value === '') {
       setBooks([]);
       return;
     }
@@ -84,14 +86,15 @@ const Search = () => {
           />
         </div>
         <div className={styles.book_search_results_container}>
+          {errors && <ErrorComponent errors={errors} />}
+          {loading && <CircularProgress size={24} />}
           {books.length === 0 && bookSearchField !== '' && (
             <div>
               <h4>sorry, no books found</h4>
             </div>
           )}
-          {books.map((book) => (
-            <BookDetailsSearch key={book.id} {...book} />
-          ))}
+          {!loading &&
+            books.map((book) => <BookDetailsSearch key={book.id} {...book} />)}
         </div>
       </div>
     </div>
