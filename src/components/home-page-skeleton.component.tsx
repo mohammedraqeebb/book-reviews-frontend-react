@@ -43,7 +43,7 @@ const HomePageSkeleton = () => {
           <Skeleton variant="rectangular" height={250} width={150} />
         </div>
       </div>
-      \
+
       <div
         style={{
           display: 'flex',

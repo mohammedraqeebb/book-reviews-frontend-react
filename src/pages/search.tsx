@@ -87,8 +87,10 @@ const Search = () => {
         </div>
         <div className={styles.book_search_results_container}>
           {errors && <ErrorComponent errors={errors} />}
-          {loading && <CircularProgress size={24} />}
-          {books.length === 0 && bookSearchField !== '' && (
+          {loading && (
+            <CircularProgress style={{ margin: '10px auto' }} size={24} />
+          )}
+          {!loading && books.length === 0 && bookSearchField !== '' && (
             <div>
               <h4>sorry, no books found</h4>
             </div>

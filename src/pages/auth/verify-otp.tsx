@@ -45,19 +45,17 @@ const VerifyOTP = () => {
   });
 
   const handleKeyBoardShow = () => {
-    if (activeIndex === 0) {
-      setActiveIndex(0);
-      const virtualInput = document.createElement('input');
-      virtualInput.style.position = 'fixed';
-      virtualInput.style.left = '100vw';
-      virtualInput.style.top = '100vh';
-      virtualInput.type = 'number';
-      document.body.appendChild(virtualInput);
-      virtualInput.focus();
-      virtualInput.addEventListener('blur', () => {
-        document.body.removeChild(virtualInput);
-      });
-    }
+    const virtualInput = document.createElement('input');
+    virtualInput.style.position = 'fixed';
+    virtualInput.style.left = '-10000px';
+    virtualInput.style.top = '-10000px';
+    virtualInput.type = 'number';
+    virtualInput.setAttribute('inputmode', 'numeric');
+    document.body.appendChild(virtualInput);
+    virtualInput.focus();
+    virtualInput.addEventListener('blur', () => {
+      document.body.removeChild(virtualInput);
+    });
   };
   const { doRequest, errors, loading } = useRequest({
     url: `${BACKEND_URL}/auth/verifyotp`,
@@ -91,7 +89,6 @@ const VerifyOTP = () => {
           className={styles.otp_input_container}
           onClick={handleKeyBoardShow}
           tabIndex={0}
-          inputMode="numeric"
         >
           <form onSubmit={handleSubmit} className={styles.form_container}>
             {OTP.map((digit, index) => (
