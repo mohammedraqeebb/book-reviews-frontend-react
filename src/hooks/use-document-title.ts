@@ -1,6 +1,6 @@
 const useDocumentTitle = (pathname: string) => {
   let pageTitle = '';
-  console.log(pathname.slice(1));
+
   if (pathname.slice(1) === 'search') {
     pageTitle = 'search';
     document.title = 'Book Reviews' + ' | ' + pageTitle;

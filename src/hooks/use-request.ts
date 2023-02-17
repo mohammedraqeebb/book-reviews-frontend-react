@@ -57,9 +57,9 @@ const useRequest = <T>({
       }
 
       if (axios.isAxiosError(axiosError)) {
-        if (axiosError.status === 401) {
-          router('/auth/sigin');
-        }
+        // if (axiosError.status === 401) {
+        //   router('/auth/signin');
+        // }
         //@ts-ignore
         setErrors(axiosError.response?.data.errors as ErrorFormat[]);
       }
