@@ -18,7 +18,7 @@ const useUserAuthPage = () => {
   const fetchData = async () => {
     const currentUserData = await doRequest();
     user = currentUserData!.user;
-    if (user) {
+    if (!user) {
       route('/profile');
     }
   };

@@ -32,7 +32,7 @@ const INITIAL_SIGN_UP_FIELDS = {
 };
 
 const Signup = () => {
-  useUserAuthPage();
+  // useUserAuthPage();
   const { setPortalMessage, setPortalShow } = usePortalContext();
 
   const dispatch = useAppDispatch();

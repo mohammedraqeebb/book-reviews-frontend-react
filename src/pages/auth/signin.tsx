@@ -27,7 +27,7 @@ const INITIAL_SIGN_IN_FIELDS = {
 };
 
 const Signin = ({}) => {
-  useUserAuthPage();
+  // useUserAuthPage();
   const { setPortalMessage, setPortalShow } = usePortalContext();
 
   const dispatch = useAppDispatch();
