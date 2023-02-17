@@ -1,6 +1,8 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import React, { FC, useEffect, useState } from 'react';
 import { AiFillStar, AiOutlineClose, AiOutlineStar } from 'react-icons/ai';
+import { usePortalContext } from '../../contexts/portal-context';
+import usePortal from '../../hooks/use-portal';
 import useRequest from '../../hooks/use-request';
 import { BACKEND_URL } from '../../main';
 import { FetchRatingsResponseBodyType } from '../../pages/book/[id]';
@@ -41,6 +43,7 @@ const RatingPost: FC<RatingPostProps> = ({
   setUserRatingId,
   userRatingId,
 }) => {
+  const { setPortalMessage, setPortalShow } = usePortalContext();
   const [ratingsArray, setRatingsArray] = useState(() =>
     createRatingArray(userRating)
   );
@@ -69,10 +72,11 @@ const RatingPost: FC<RatingPostProps> = ({
       rating: userRating,
     },
     onSuccess: (data) => {
-      console.log(data);
       setUserRatingId(data.rating.id);
       setExecuteFetchRatings((value) => !value);
       setShowRatingPost(false);
+      setPortalShow(true);
+      setPortalMessage('book rating added');
     },
   });
   const {
@@ -89,9 +93,11 @@ const RatingPost: FC<RatingPostProps> = ({
     onSuccess: (data) => {
       setExecuteFetchRatings((value) => !value);
       setShowRatingPost(false);
+      setPortalShow(true);
+      setPortalMessage('book rating edited');
     },
   });
-  console.log(userRating, userRatingId, 'user rating');
+
   return (
     <AnimatePresence>
       <div className={styles.rating_post_container}>

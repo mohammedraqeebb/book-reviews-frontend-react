@@ -9,6 +9,7 @@ import { useAppSelector } from '../../app/hooks';
 import { AiFillRightCircle } from 'react-icons/ai';
 import { BACKEND_URL } from '../../main';
 import ErrorComponent from '../error.component';
+import { usePortalContext } from '../../contexts/portal-context';
 
 type User = {
   id: string;
@@ -36,6 +37,7 @@ const Comment: FC<CommentProps> = ({
   const [showEditForm, setShowEditForm] = useState(false);
   const [commentText, setCommentText] = useState(comment);
   const isCommentor = user && commentor.id.toString() === user.id;
+  const { setPortalMessage, setPortalShow } = usePortalContext();
 
   const { doRequest: editCommentRequest, errors: editCommentRequestErrors } =
     useRequest({
@@ -45,6 +47,8 @@ const Comment: FC<CommentProps> = ({
       onSuccess: (data) => {
         setExecuteFetchComments((value) => !value);
         setShowEditForm(false);
+        setPortalShow(true);
+        setPortalMessage('comment deleted');
       },
     });
   const {
@@ -56,6 +60,8 @@ const Comment: FC<CommentProps> = ({
     body: {},
     onSuccess: (data) => {
       setExecuteFetchComments((value) => !value);
+      setPortalShow(true);
+      setPortalMessage('comment deleted');
     },
   });
 

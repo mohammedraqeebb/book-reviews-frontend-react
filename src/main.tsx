@@ -5,7 +5,8 @@ import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import { store } from './app/store';
 import '../src/styles/globals.scss';
-import PortalMessageComponent from './components/portal-message.component';
+
+import { PortalProvider } from './contexts/portal-context';
 
 export const BACKEND_URL =
   'https://book-reviews-backend-latest.onrender.com/api';
@@ -14,7 +15,9 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <BrowserRouter>
       <Provider store={store}>
-        <App />
+        <PortalProvider>
+          <App />
+        </PortalProvider>
       </Provider>
     </BrowserRouter>
   </React.StrictMode>

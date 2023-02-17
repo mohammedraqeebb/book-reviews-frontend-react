@@ -7,24 +7,20 @@ import React, {
 } from 'react';
 import { createPortal } from 'react-dom';
 import PortalMessageComponent from '../components/portal-message.component';
-type UsePortalProps = {
-  message: string;
-};
+import { usePortalContext } from '../contexts/portal-context';
+const usePortal = () => {
+  const { portalShow, setPortalMessage, setPortalShow, portalMessage } =
+    usePortalContext();
 
-const usePortal = ({ message }: UsePortalProps) => {
-  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    const unmountingTime = setTimeout(() => {
+      setPortalMessage('');
+      setPortalShow(false);
+    }, 3000);
+    return () => clearTimeout(unmountingTime);
+  }, [portalShow]);
 
-  const showPortal = () => {
-    useEffect(() => {
-      const unmountingTime = setTimeout(() => {
-        setMounted(false);
-      }, 5000);
-      setMounted(true);
-      return () => clearTimeout(unmountingTime);
-    }, []);
-    return <PortalMessageComponent message={message} />;
-  };
-  return showPortal;
+  return portalShow ? <PortalMessageComponent message={portalMessage} /> : null;
 };
 
 export default usePortal;

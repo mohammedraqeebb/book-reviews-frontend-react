@@ -21,17 +21,17 @@ import { useNavigate } from 'react-router-dom';
 import { BACKEND_URL } from '../main';
 import { CircularProgress } from '@mui/material';
 import ErrorComponent from '../components/error.component';
+import useUser from '../hooks/use-user';
+import { usePortalContext } from '../contexts/portal-context';
 
 const Profile = () => {
   const user = useAppSelector((state) => state.user.user);
+  useUser();
 
   const dispatch = useAppDispatch();
   const router = useNavigate();
-  useEffect(() => {
-    if (!user) {
-      router('/auth/signin');
-    }
-  }, []);
+  const { setPortalMessage, setPortalShow } = usePortalContext();
+
   const [name, setName] = useState(user?.name ?? '');
   const [showNameForm, setShowNameForm] = useState(false);
   const [booksData, setBooksData] = useState<Book[]>([]);
@@ -40,26 +40,34 @@ const Profile = () => {
     showViewedBooks: false,
   });
 
-  const { doRequest: signOutRequest, errors: signOutRequestErrors } =
-    useRequest<null>({
-      url: `${BACKEND_URL}/auth/signout`,
-      method: 'post',
-      onSuccess: () => {
-        dispatch(signout());
-        router('/auth/signin');
-      },
-    });
-  const { doRequest: nameChangeRequest, errors: nameChangeRequestErrors } =
-    useRequest<null>({
-      url: `${BACKEND_URL}/user/namechange`,
-      method: 'post',
-      body: { name },
-      onSuccess: (data) => {
-        dispatch(signin(data.user));
+  const {
+    doRequest: signOutRequest,
+    errors: signOutRequestErrors,
+    loading: signOutRequestLoading,
+  } = useRequest<null>({
+    url: `${BACKEND_URL}/auth/signout`,
+    method: 'post',
+    onSuccess: () => {
+      dispatch(signout());
+      router('/auth/signin');
+      setPortalShow(true);
+      setPortalMessage('signed out successfully');
+    },
+  });
+  const {
+    doRequest: nameChangeRequest,
+    errors: nameChangeRequestErrors,
+    loading: nameChangeRequestLoading,
+  } = useRequest<null>({
+    url: `${BACKEND_URL}/user/namechange`,
+    method: 'post',
+    body: { name },
+    onSuccess: (data) => {
+      dispatch(signin(data.user));
 
-        setShowNameForm(false);
-      },
-    });
+      setShowNameForm(false);
+    },
+  });
 
   const {
     doRequest: getLikedBooksRequest,
@@ -130,11 +138,16 @@ const Profile = () => {
                   .toLocaleUpperCase()}
             </h2>
           </div>
+
           {signOutRequestErrors && (
             <ErrorComponent errors={signOutRequestErrors} />
           )}
           <button className={styles.signout_button} onClick={handleSignout}>
-            sign out
+            {signOutRequestLoading ? (
+              <CircularProgress color="inherit" size={12} />
+            ) : (
+              'sign out'
+            )}
           </button>
           {!showNameForm && (
             <div className={styles.name_container}>
@@ -160,7 +173,11 @@ const Profile = () => {
                 onClick={handleNameChangeSubmit}
                 className={styles.name_change_submit_button}
               >
-                change name
+                {nameChangeRequestLoading ? (
+                  <CircularProgress color="primary" size={12} />
+                ) : (
+                  'change name'
+                )}
               </button>
               {}
               <button

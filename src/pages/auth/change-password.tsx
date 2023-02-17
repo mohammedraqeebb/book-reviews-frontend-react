@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import Button from '../../components/button/button.component';
 import ErrorComponent from '../../components/error.component';
 import FormInputText from '../../components/form-input-text.tsx/form-input-text.component';
+import { usePortalContext } from '../../contexts/portal-context';
 import useRequest from '../../hooks/use-request';
 import { BACKEND_URL } from '../../main';
 import styles from '../../styles/ChangePassword.module.scss';
@@ -21,6 +22,7 @@ const ChangePassword = () => {
   const [changePasswordFormFields, setChangePasswordFormFields] = useState(
     INITIAL_CHANGE_PASSWORD_FIELDS
   );
+  const { setPortalMessage, setPortalShow } = usePortalContext();
   const [email, setEmail] = useState('');
   useEffect(() => {
     setEmail(localStorage.getItem('email') ?? '');
@@ -35,6 +37,8 @@ const ChangePassword = () => {
     method: 'post',
     onSuccess: () => {
       router('/auth/signin', { replace: true });
+      setPortalShow(true);
+      setPortalMessage('password changed successfully');
     },
     body: {
       password: changePasswordFormFields.password,

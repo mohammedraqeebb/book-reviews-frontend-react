@@ -22,10 +22,11 @@ import usePortal from './hooks/use-portal';
 import NotFound from './pages/not-found';
 
 function App() {
-  const showPortal = usePortal({ message: '' });
+  const Portal = usePortal();
+
   return (
     <>
-      {showPortal()}
+      {Portal}
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />

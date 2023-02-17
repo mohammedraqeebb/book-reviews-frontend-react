@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import BooksList from '../components/books-list/books-list.component';
 import ErrorComponent from '../components/error.component';
 import HomePageSkeleton from '../components/home-page-skeleton.component';
+import { usePortalContext } from '../contexts/portal-context';
 
 import useRequest from '../hooks/use-request';
 import { BACKEND_URL } from '../main';
@@ -14,6 +15,8 @@ import { Book } from './search';
 const Home = () => {
   const [mostLikedBooks, setMostLikedBooks] = useState<Book[]>([]);
   const [mostViewedBooks, setMostViewedBooks] = useState<Book[]>([]);
+  const { setPortalMessage: setMessage, setPortalShow: setShow } =
+    usePortalContext();
   const {
     doRequest: getMostLikedBooksRequest,
     errors: getMostLikedBooksRequestErrors,

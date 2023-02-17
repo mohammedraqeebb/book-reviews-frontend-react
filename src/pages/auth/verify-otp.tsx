@@ -44,18 +44,24 @@ const VerifyOTP = () => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   });
 
+  let virtualInput: HTMLInputElement | null = null;
+
   const handleKeyBoardShow = () => {
-    const virtualInput = document.createElement('input');
-    virtualInput.style.position = 'fixed';
-    virtualInput.style.left = '-10000px';
-    virtualInput.style.top = '-10000px';
-    virtualInput.type = 'number';
-    virtualInput.setAttribute('inputmode', 'numeric');
-    document.body.appendChild(virtualInput);
+    if (!virtualInput) {
+      virtualInput = document.createElement('input');
+      virtualInput.style.position = 'fixed';
+      virtualInput.style.left = '-10000px';
+      virtualInput.style.top = '-10000px';
+      virtualInput.type = 'number';
+      virtualInput.inputMode = 'numeric';
+      virtualInput.setAttribute('inputmode', 'numeric');
+      document.body.appendChild(virtualInput);
+      virtualInput.addEventListener('blur', () => {
+        document.body.removeChild(virtualInput!);
+        virtualInput = null;
+      });
+    }
     virtualInput.focus();
-    virtualInput.addEventListener('blur', () => {
-      document.body.removeChild(virtualInput);
-    });
   };
   const { doRequest, errors, loading } = useRequest({
     url: `${BACKEND_URL}/auth/verifyotp`,

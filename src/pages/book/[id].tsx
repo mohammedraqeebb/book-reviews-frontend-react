@@ -41,6 +41,7 @@ import { BACKEND_URL } from '../../main';
 import { Link, useParams } from 'react-router-dom';
 import RatingPost from '../../components/rating-post/rating-post.component';
 import BookDetailsPageSkeleton from '../../components/book-details-page-skeleton.component copy';
+import { usePortalContext } from '../../contexts/portal-context';
 
 //@ts-ignore
 type User = {
@@ -116,7 +117,7 @@ const BookDetails = () => {
   const [userRatingId, setUserRatingId] = useState('');
   const [ratings, setRatings] = useState<RatingsType[]>([]);
   const [executeFetchRatings, setExecuteFetchRatings] = useState(false);
-  const [averageRating, setAverageRating] = useState(0);
+  const { setPortalMessage, setPortalShow } = usePortalContext();
 
   const {
     doRequest: fetchCommentsRequest,
@@ -291,6 +292,8 @@ const BookDetails = () => {
     event.stopPropagation();
     if (user) {
       dispatch({ type: 'ADD_LIKE' });
+      setPortalShow(true);
+      setPortalMessage('book like added');
     }
     await addLikeRequest();
   };
@@ -298,6 +301,8 @@ const BookDetails = () => {
     event.stopPropagation();
     if (user) {
       dispatch({ type: 'REMOVE_LIKE' });
+      setPortalShow(true);
+      setPortalMessage('book like removed');
     }
     await removeLikeRequest();
   };
@@ -305,6 +310,8 @@ const BookDetails = () => {
     event.stopPropagation();
     if (user) {
       dispatch({ type: 'ADD_DISLIKE' });
+      setPortalShow(true);
+      setPortalMessage('book dislike added');
     }
     await addDislikeRequest();
   };
@@ -312,6 +319,8 @@ const BookDetails = () => {
     event.stopPropagation();
     if (user) {
       dispatch({ type: 'REMOVE_DISLIKE' });
+      setPortalShow(true);
+      setPortalMessage('book disliked removed');
     }
     await removeDislikeRequest();
   };
@@ -325,6 +334,8 @@ const BookDetails = () => {
       onSuccess: (data) => {
         setExecuteFetchComments((value) => !value);
         setcomment('');
+        setPortalShow(true);
+        setPortalMessage('comment added');
       },
     });
   const handleCommentSubmit = async (event: FormEvent) => {
@@ -363,6 +374,8 @@ const BookDetails = () => {
     event.stopPropagation();
     if (user) {
       setIsBookSaved(true);
+      setPortalShow(true);
+      setPortalMessage('book saved');
     }
     await addBookToSavedListRequest();
   };
@@ -370,6 +383,8 @@ const BookDetails = () => {
     event.stopPropagation();
     if (user) {
       setIsBookSaved(false);
+      setPortalShow(true);
+      setPortalMessage('book unsaved');
     }
     await deleteBookFromSavedListRequest();
   };

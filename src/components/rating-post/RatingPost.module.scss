@@ -2,7 +2,7 @@
 
 .rating_post_container {
   position: fixed;
-  width: 80%;
+  width: auto;
   max-width: 400px;
   border: 1px solid $color_neutral_500;
   box-shadow: 0px 0px 10px 100000px rgba(0, 0, 0, 0.5);
@@ -12,7 +12,9 @@
   left: 50%;
   z-index: 100;
   display: flex;
-  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
   transform: translateX(-50%);
   h3 {
     text-align: center;
@@ -44,10 +46,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 0.6rem;
-    max-width: 80%;
+    gap: 0.4rem;
+    margin: 0 auto;
+    max-width: 90%;
 
-    padding: 2rem;
+    padding: 1rem;
     border: 1px solid $color_neutral_500;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 2px 7px;
     .submit_post_button {
@@ -57,6 +60,7 @@
       background: black;
       font-weight: 600;
       text-transform: capitalize;
+      margin-right: 1rem;
       &:hover {
         background: white;
         border: 1px solid black;

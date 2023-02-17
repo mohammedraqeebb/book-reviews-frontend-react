@@ -20,6 +20,9 @@ import ErrorComponent from '../../components/error.component';
 import { useNavigate } from 'react-router-dom';
 import { BACKEND_URL } from '../../main';
 import { CircularProgress } from '@mui/material';
+import useUser from '../../hooks/use-user';
+import useUserAuthPage from '../../hooks/use-user-auth-page';
+import { usePortalContext } from '../../contexts/portal-context';
 
 const INITIAL_SIGN_UP_FIELDS = {
   name: '',
@@ -29,7 +32,8 @@ const INITIAL_SIGN_UP_FIELDS = {
 };
 
 const Signup = () => {
-  const user = useAppSelector((state) => state.user.user);
+  useUserAuthPage();
+  const { setPortalMessage, setPortalShow } = usePortalContext();
 
   const dispatch = useAppDispatch();
   const router = useNavigate();
@@ -126,15 +130,11 @@ const Signup = () => {
     onSuccess: (data) => {
       dispatch(signin(data.user));
       router(-1);
+      setPortalShow(true);
+      setPortalMessage('you are signed up');
     },
     body: signupFormFields,
   });
-
-  useEffect(() => {
-    if (user) {
-      router('/profile');
-    }
-  }, []);
 
   return (
     <div className={styles.signup_wrapper}>

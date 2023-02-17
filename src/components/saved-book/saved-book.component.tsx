@@ -1,5 +1,6 @@
 import React, { FC, useState, MouseEvent } from 'react';
 import { Link } from 'react-router-dom';
+import { usePortalContext } from '../../contexts/portal-context';
 import useRequest from '../../hooks/use-request';
 import { BACKEND_URL } from '../../main';
 import { Book } from '../../pages/search';
@@ -18,16 +19,21 @@ const SavedBook: FC<Book> = ({
   authors,
   publisher,
 }) => {
+  const { setPortalMessage, setPortalShow } = usePortalContext();
   const [isBookSaved, setIsBookSaved] = useState(true);
   const handleSave = async (event: MouseEvent<HTMLSpanElement>) => {
     event.preventDefault();
     event.stopPropagation();
+    setPortalShow(true);
+    setPortalMessage('book saved');
     setIsBookSaved(true);
     await addBookToSavedListRequest();
   };
   const handleUnsave = async (event: MouseEvent<HTMLSpanElement>) => {
     event.preventDefault();
     event.stopPropagation();
+    setPortalShow(true);
+    setPortalMessage('book unsaved');
 
     setIsBookSaved(false);
     await deleteBookFromSavedListRequest();

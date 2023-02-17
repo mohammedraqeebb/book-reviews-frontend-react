@@ -18,13 +18,18 @@ import { Link, useNavigate } from 'react-router-dom';
 import { BACKEND_URL } from '../../main';
 import { CircularProgress } from '@mui/material';
 
+import useUserAuthPage from '../../hooks/use-user-auth-page';
+import { usePortalContext } from '../../contexts/portal-context';
+
 const INITIAL_SIGN_IN_FIELDS = {
   email: '',
   password: '',
 };
 
 const Signin = ({}) => {
-  const user = useAppSelector((state) => state.user.user);
+  useUserAuthPage();
+  const { setPortalMessage, setPortalShow } = usePortalContext();
+
   const dispatch = useAppDispatch();
   const router = useNavigate();
 
@@ -35,21 +40,14 @@ const Signin = ({}) => {
     email: false,
     password: false,
   });
-  useEffect(() => {
-    if (user) {
-      router('/profile');
-    } else {
-      setSigninFormFields({
-        ...signinFormFields,
-        email: localStorage.getItem('email') ?? '',
-      });
-    }
-  }, []);
+
   const [showPassword, setShowPassword] = useState(false);
   const { doRequest, errors, loading } = useRequest({
     url: `${BACKEND_URL}/auth/signin`,
     method: 'post',
     onSuccess: (data) => {
+      setPortalShow(true);
+      setPortalMessage('you are signed in');
       dispatch(signin(data.user));
       router(-1);
     },

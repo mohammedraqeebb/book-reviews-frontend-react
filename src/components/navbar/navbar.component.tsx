@@ -16,12 +16,13 @@ import ProfileActiveIcon from '../../static/assets/icons/profile-active.icon';
 import ProfileIcon from '../../static/assets/icons/profile.icon';
 import { useAppSelector } from '../../app/hooks';
 import Logo from '../../static/assets/icons/logo.icon';
+import useDocumentTitle from '../../hooks/use-document-title';
 
 const Navbar = () => {
   const [currentPath, setCurrentPath] = useState('');
   const location = useLocation();
   const user = useAppSelector((state) => state.user.user);
-
+  useDocumentTitle(location.pathname);
   useEffect(() => {
     setCurrentPath(location.pathname.slice(1));
   }, [location.pathname]);

@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { useAppDispatch } from '../../app/hooks';
 import { signin } from '../../features/user/user-slice';
 import useRequest from '../../hooks/use-request';
@@ -6,12 +7,12 @@ import { BACKEND_URL } from '../../main';
 
 import Logo from '../../static/assets/icons/logo.icon';
 import styles from './Header.module.scss';
-type User = {
+export type User = {
   id: string;
   name: string;
 };
 
-type UserRequestResponse = {
+export type UserRequestResponse = {
   user: User | null;
 };
 
@@ -32,9 +33,9 @@ const Header = () => {
     fetchUser();
   }, []);
   return (
-    <div className={styles.header_container}>
+    <Link to="/" className={styles.header_container}>
       <Logo />
-    </div>
+    </Link>
   );
 };
 

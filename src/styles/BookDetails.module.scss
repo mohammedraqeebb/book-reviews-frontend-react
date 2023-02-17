@@ -53,13 +53,15 @@
       }
       .book_info {
         position: relative;
-        margin: auto;
 
         .name_and_icon_container {
+          width: 100%;
           display: flex;
-          align-items: center;
-          gap: 2rem;
+          gap: 1rem;
+          flex-wrap: wrap;
           .book_name {
+            display: inline-block;
+            width: auto;
             letter-spacing: -0.5px;
             margin-bottom: 1.6rem;
           }
@@ -139,6 +141,9 @@
               font-size: 1.2rem;
             }
           }
+          .rating_container {
+            width: 4.6rem;
+          }
         }
 
         .about_container {
@@ -148,11 +153,13 @@
           line-height: 1.6rem;
           font-weight: 500;
           color: $color_neutral_700;
+          width: auto;
         }
       }
     }
 
     .comments_section {
+      margin: 0 1rem 0 1rem;
       .number_of_ratings_and_comments_container {
         display: flex;
         margin-left: 2rem;
@@ -171,7 +178,7 @@
       width: 100%;
       justify-content: center;
       align-items: center;
-      max-width: 320px;
+      max-width: 400px;
       padding: 0rem 1rem 0 1rem;
 
       .comment_input_container {

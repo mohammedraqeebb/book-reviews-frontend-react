@@ -13,7 +13,7 @@ const PortalMessageComponent: FC<PortalComponentProps> = ({ message }) => {
   return (
     <AnimatePresence>
       <motion.div
-        initial={{ y: '-100', opacity: 0 }}
+        initial={{ y: '100', opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         exit={{
           y: '-100',
@@ -21,15 +21,15 @@ const PortalMessageComponent: FC<PortalComponentProps> = ({ message }) => {
           transition: { duration: 0.2, ease: 'ease-in-out' },
         }}
         style={{
-          width: '220px',
+          width: '180px',
           height: 'auto',
-          minHeight: '60px',
+          minHeight: '40px',
           border: '1px solid #000011',
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
           position: 'absolute',
-          top: 5,
+          bottom: '50px',
           left: '50%',
           padding: '10',
           transform: 'translateX(-50%)',
