@@ -52,6 +52,7 @@ const Profile = () => {
       router('/auth/signin');
       setPortalShow(true);
       setPortalMessage('signed out successfully');
+      localStorage.removeItem('token');
     },
   });
   const {

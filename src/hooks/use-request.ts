@@ -43,7 +43,12 @@ const useRequest = <T>({
         {
           ...body,
         },
-        { withCredentials: true }
+        {
+          withCredentials: true,
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token') ?? null}`,
+          },
+        }
       );
 
       setLoading(false);

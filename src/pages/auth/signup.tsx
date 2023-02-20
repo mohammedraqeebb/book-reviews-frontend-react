@@ -129,6 +129,7 @@ const Signup = () => {
     method: 'post',
     onSuccess: (data) => {
       dispatch(signin(data.user));
+      localStorage.setItem('token', data.token);
       router(-1);
       setPortalShow(true);
       setPortalMessage('you are signed up');

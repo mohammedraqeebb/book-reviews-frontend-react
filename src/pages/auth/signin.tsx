@@ -49,6 +49,7 @@ const Signin = ({}) => {
       setPortalShow(true);
       setPortalMessage('you are signed in');
       dispatch(signin(data.user));
+      localStorage.setItem('token', data.token);
       router(-1);
     },
     body: signinFormFields,
