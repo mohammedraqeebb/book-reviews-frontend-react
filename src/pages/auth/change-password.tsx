@@ -115,6 +115,7 @@ const ChangePassword = () => {
     event.preventDefault();
     await doRequest();
   };
+
   return (
     <div className={styles.change_password_wrapper}>
       <div className={styles.change_password_container}>

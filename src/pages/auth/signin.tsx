@@ -14,7 +14,7 @@ import { isButtonDisabled } from '../../util/validation/enable-button';
 import ErrorComponent from '../../components/error.component';
 
 import usePortal from '../../hooks/use-portal';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { BACKEND_URL } from '../../main';
 import { CircularProgress } from '@mui/material';
 
@@ -27,9 +27,10 @@ const INITIAL_SIGN_IN_FIELDS = {
 };
 
 const Signin = ({}) => {
-  // useUserAuthPage();
+  useUserAuthPage();
   const { setPortalMessage, setPortalShow } = usePortalContext();
-
+  const location = useLocation();
+  const previousPathname: string = location.state?.referrer || '/';
   const dispatch = useAppDispatch();
   const router = useNavigate();
 
@@ -50,7 +51,11 @@ const Signin = ({}) => {
       setPortalMessage('you are signed in');
       dispatch(signin(data.user));
       localStorage.setItem('token', data.token);
-      router(-1);
+      if (previousPathname.startsWith('/auth')) {
+        router('/');
+      } else {
+        router(-1);
+      }
     },
     body: signinFormFields,
   });

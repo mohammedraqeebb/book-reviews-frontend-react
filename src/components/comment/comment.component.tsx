@@ -10,6 +10,7 @@ import { AiFillRightCircle } from 'react-icons/ai';
 import { BACKEND_URL } from '../../main';
 import ErrorComponent from '../error.component';
 import { usePortalContext } from '../../contexts/portal-context';
+import { CircularProgress } from '@mui/material';
 
 type User = {
   id: string;
@@ -39,21 +40,25 @@ const Comment: FC<CommentProps> = ({
   const isCommentor = user && commentor.id.toString() === user.id;
   const { setPortalMessage, setPortalShow } = usePortalContext();
 
-  const { doRequest: editCommentRequest, errors: editCommentRequestErrors } =
-    useRequest({
-      url: `${BACKEND_URL}/book/comment/${bookId}/${id}/edit`,
-      method: 'put',
-      body: { comment: commentText },
-      onSuccess: (data) => {
-        setExecuteFetchComments((value) => !value);
-        setShowEditForm(false);
-        setPortalShow(true);
-        setPortalMessage('comment deleted');
-      },
-    });
+  const {
+    doRequest: editCommentRequest,
+    errors: editCommentRequestErrors,
+    loading: editCommentRequestLoading,
+  } = useRequest({
+    url: `${BACKEND_URL}/book/comment/${bookId}/${id}/edit`,
+    method: 'put',
+    body: { comment: commentText },
+    onSuccess: (data) => {
+      setExecuteFetchComments((value) => !value);
+      setShowEditForm(false);
+      setPortalShow(true);
+      setPortalMessage('comment edited');
+    },
+  });
   const {
     doRequest: deleteCommentRequest,
     errors: deleteCommentRequestErrors,
+    loading: deleteCommentRequestLoading,
   } = useRequest({
     url: `${BACKEND_URL}/book/comment/${bookId}/${id}/delete`,
     method: 'post',
@@ -87,11 +92,23 @@ const Comment: FC<CommentProps> = ({
         </div>
         {isCommentor && (
           <div className={styles.icons}>
-            <FiEdit size={16} onClick={() => setShowEditForm(!showEditForm)} />
+            {editCommentRequestLoading ? (
+              <CircularProgress size={12} color="inherit" />
+            ) : (
+              <FiEdit
+                size={16}
+                onClick={() => setShowEditForm(!showEditForm)}
+              />
+            )}
+
             {deleteCommentRequestErrors && (
               <ErrorComponent errors={deleteCommentRequestErrors} />
             )}
-            <FiTrash size={16} onClick={() => deleteCommentRequest()} />
+            {deleteCommentRequestLoading ? (
+              <CircularProgress size={12} color="inherit" />
+            ) : (
+              <FiTrash size={16} onClick={() => deleteCommentRequest()} />
+            )}
           </div>
         )}
       </div>

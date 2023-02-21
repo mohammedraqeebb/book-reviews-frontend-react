@@ -1,0 +1,21 @@
+.navlink_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  gap: 1px;
+  height: 40px;
+  width: 40px;
+  .navlink_name {
+    font-size: 6px;
+  }
+}
+
+@media screen and (420px<=width) {
+  .navlink_container {
+    .navlink_name {
+      font-size: 8px;
+    }
+  }
+}

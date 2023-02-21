@@ -67,6 +67,7 @@ const Profile = () => {
       dispatch(signin(data.user));
 
       setShowNameForm(false);
+      localStorage.setItem('token', data.token);
     },
   });
 

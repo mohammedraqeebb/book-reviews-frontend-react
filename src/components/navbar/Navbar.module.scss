@@ -32,7 +32,7 @@
         &::before {
           content: '';
           position: absolute;
-          bottom: 0;
+          bottom: 101%;
           left: 0;
           width: 0;
           height: 3px;
@@ -76,6 +76,34 @@
 
         gap: 4rem;
         justify-content: flex-start;
+        a {
+          position: relative;
+
+          &::before {
+            content: '';
+            position: absolute;
+            top: 100%;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background-color: #121213;
+            transition: width 0.3s ease-out;
+            z-index: -100;
+          }
+
+          &:hover {
+            &::before {
+              width: 100%;
+            }
+          }
+
+          &:active {
+            &::before {
+              width: 100%;
+            }
+          }
+        }
       }
     }
   }
@@ -99,6 +127,34 @@
 
         gap: 6rem;
         justify-content: flex-start;
+        a {
+          position: relative;
+
+          &::before {
+            content: '';
+            position: absolute;
+            top: 100%;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background-color: #121213;
+            transition: width 0.3s ease-out;
+            z-index: -100;
+          }
+
+          &:hover {
+            &::before {
+              width: 100%;
+            }
+          }
+
+          &:active {
+            &::before {
+              width: 100%;
+            }
+          }
+        }
       }
     }
   }

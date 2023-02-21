@@ -34,7 +34,8 @@ const PortalMessageComponent: FC<PortalComponentProps> = ({ message }) => {
           padding: '10',
           transform: 'translateX(-50%)',
           userSelect: 'none',
-          background: 'white',
+          background: '#273c75',
+          color: 'white',
           fontSize: '10',
           boxShadow: 'rgba(149, 157, 165, 0.2) 0px 8px 24px',
         }}

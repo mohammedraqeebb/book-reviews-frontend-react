@@ -50,7 +50,7 @@ const ForgotPassword = () => {
             type="email"
             label="Email (please check spam)"
             info
-            validationMessage="check spam"
+            validationMessage="check spam,,also, sometimes you may not recieve otp if the sent email is blocked my microsoft"
             name="email"
             value={email}
             placeholder="tom@example.com"

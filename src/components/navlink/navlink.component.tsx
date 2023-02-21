@@ -1,6 +1,7 @@
 import React from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import styles from './NavLink.module.scss';
 interface NavLinkProps {
   to: string;
   name: string;
@@ -23,14 +24,8 @@ const NavLink = ({
     <Link
       style={{
         fontWeight: isActive ? 700 : 400,
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        flexDirection: 'column',
-        textAlign: 'center',
-        height: '44px',
-        width: '40px',
       }}
+      className={styles.navlink_container}
       to={to}
     >
       <AnimatePresence>
@@ -41,7 +36,7 @@ const NavLink = ({
           <motion.div whileTap={{ scale: 0.6 }}>{inactiveComponent}</motion.div>
         )}
       </AnimatePresence>
-      {name}
+      <p className={styles.navlink_name}>{name}</p>
     </Link>
   );
 };

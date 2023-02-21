@@ -104,7 +104,7 @@ const VerifyOTP = () => {
                   activeIndex === index ? styles.active : ''
                 }`}
               >
-                {digit}
+                <p>{digit}</p>
               </div>
             ))}
             <button

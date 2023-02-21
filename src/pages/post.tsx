@@ -15,6 +15,7 @@ import ErrorComponent from '../components/error.component';
 import { BACKEND_URL } from '../main';
 import { Link, useNavigate } from 'react-router-dom';
 import { CircularProgress } from '@mui/material';
+import useUser from '../hooks/use-user';
 
 type Author = {
   id: string;
@@ -35,6 +36,7 @@ const INITIIAL_BOOK_FORM_FIELDS = {
 };
 
 const Post = () => {
+  useUser();
   const [searchAuthorField, setSearchAuthorField] = useState('');
   const [fetchedAuthors, setFetchedAuthors] = useState<Author[]>([]);
   const [fetchedPublishers, setFetchedPublishers] = useState<Publisher[]>([]);

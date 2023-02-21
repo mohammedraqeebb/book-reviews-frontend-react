@@ -130,13 +130,14 @@
       max-width: 95%;
       background: red;
       top: -20px;
+
       z-index: 10000;
       right: -6px;
       background: #0c090a;
       color: white;
       padding: 0.2rem;
       .validation_rule_text {
-        font-size: 0.7rem;
+        font-size: 0.9rem;
       }
       &::before {
         content: '';

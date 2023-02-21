@@ -11,12 +11,14 @@ import styles from '../styles/Saved.module.scss';
 import PageSkeleton from '../components/page-skeleton.component';
 import { BACKEND_URL } from '../main';
 import ErrorComponent from '../components/error.component';
+import useUser from '../hooks/use-user';
 
 type SavedPageProps = {
   savedBooks: Book[];
 };
 
 const Saved = () => {
+  useUser();
   const [savedBooks, setSavedBooks] = useState<Book[]>([]);
 
   const {

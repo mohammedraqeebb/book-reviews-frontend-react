@@ -19,7 +19,7 @@ const useUser = () => {
     const currentUserData = await doRequest();
     user = currentUserData!.user;
     if (!user) {
-      route('/auth/sigin');
+      route('/auth/signin');
     }
   };
 

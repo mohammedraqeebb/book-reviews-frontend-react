@@ -17,7 +17,7 @@ import {
 } from '../../util/validation/auth';
 import { isButtonDisabled } from '../../util/validation/enable-button';
 import ErrorComponent from '../../components/error.component';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { BACKEND_URL } from '../../main';
 import { CircularProgress } from '@mui/material';
 import useUser from '../../hooks/use-user';
@@ -32,7 +32,7 @@ const INITIAL_SIGN_UP_FIELDS = {
 };
 
 const Signup = () => {
-  // useUserAuthPage();
+  useUserAuthPage();
   const { setPortalMessage, setPortalShow } = usePortalContext();
 
   const dispatch = useAppDispatch();
@@ -48,6 +48,8 @@ const Signup = () => {
     confirmPassword: false,
   });
   const [showPassword, setShowPassword] = useState(false);
+  const location = useLocation();
+  const previousPathname: string = location.state?.referrer || '/';
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -130,9 +132,14 @@ const Signup = () => {
     onSuccess: (data) => {
       dispatch(signin(data.user));
       localStorage.setItem('token', data.token);
-      router(-1);
+
       setPortalShow(true);
       setPortalMessage('you are signed up');
+      if (previousPathname.startsWith('/auth')) {
+        router('/');
+      } else {
+        router(-1);
+      }
     },
     body: signupFormFields,
   });
