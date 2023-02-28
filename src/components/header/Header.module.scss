@@ -10,7 +10,7 @@
   margin-bottom: 4rem;
 }
 
-@media (421px<=width) {
+@media (min-width: 421px) {
   .header_container {
     visibility: hidden;
   }

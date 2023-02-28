@@ -32,7 +32,7 @@
   }
 }
 
-@media screen and (701px<= width) {
+@media screen and (min-width: 701px) {
   .book_cover_wrapper {
     height: 28rem;
     width: 14rem;

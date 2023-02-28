@@ -93,7 +93,7 @@
   }
 }
 
-@media screen and (421px<=width) {
+@media screen and (min-width: 421px) {
   .form_input_text_container {
     height: 5rem;
     .input_container {

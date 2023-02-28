@@ -375,7 +375,7 @@
   }
 }
 
-@media screen and (701px<= width) {
+@media screen and (min-width: 701px) {
   .book_view_page_wrapper {
     .book_view_page {
       .book_details_section {

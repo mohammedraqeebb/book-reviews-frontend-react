@@ -85,7 +85,7 @@
   }
 }
 
-@media screen and (420px<=width) {
+@media screen and (min-width: 421px) {
   .comment_container {
     .comment_first_row {
       .logo_and_name_time_container {

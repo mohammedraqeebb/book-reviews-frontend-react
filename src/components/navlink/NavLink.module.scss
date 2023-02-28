@@ -12,7 +12,7 @@
   }
 }
 
-@media screen and (420px<=width) {
+@media screen and (min-width: 421px) {
   .navlink_container {
     .navlink_name {
       font-size: 8px;

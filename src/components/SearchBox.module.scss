@@ -30,7 +30,7 @@
   }
 }
 
-@media screen and (421px<=width<=700px) {
+@media screen and (min-width: 421px) and (max-width: 700px) {
   .search_box_container {
     .search_box {
       height: 3.6rem;
@@ -46,7 +46,7 @@
     }
   }
 }
-@media screen and (701px<=width) {
+@media screen and (min-width: 701px) {
   .search_box_container {
     .search_box {
       height: 3.6rem;

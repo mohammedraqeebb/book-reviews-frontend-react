@@ -155,7 +155,7 @@
   }
 }
 
-@media screen and (421px<=width<=700px) {
+@media screen and (min-width: 421px) and (max-width: 700px) {
   .profile_page_wrapper {
     .profile_page_container {
       max-width: 700px;
@@ -308,7 +308,7 @@
   }
 }
 
-@media screen and (701px<=width) {
+@media screen and (min-width: 701px) {
   .profile_page_wrapper {
     .profile_page_container {
       max-width: 700px;
