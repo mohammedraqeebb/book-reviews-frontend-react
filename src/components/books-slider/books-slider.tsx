@@ -9,7 +9,6 @@ type BookSliderProps = {
 };
 
 const BookSlider = ({ books }: BookSliderProps) => {
-  console.log(books);
   const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {

@@ -5,6 +5,7 @@
   width: 100%;
   .books_list_title {
     color: #212c33;
+    font-size: 1.8rem;
   }
   .books_list_container {
     display: flex;
@@ -18,6 +19,9 @@
 @media screen and (min-width: 421px) and (min-width: 700px) {
   .books_list_component {
     gap: 1.2rem;
+    .books_list_title {
+      font-size: 2rem;
+    }
 
     .books_list_container {
       gap: 1.5rem;
@@ -27,6 +31,9 @@
 @media screen and (min-width: 421px) and (min-width: 700px) {
   .books_list_component {
     gap: 2rem;
+    .books_list_title {
+      font-size: 2.4rem;
+    }
 
     .books_list_container {
       gap: 1.5rem;

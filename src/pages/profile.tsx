@@ -25,9 +25,9 @@ import useUser from '../hooks/use-user';
 import { usePortalContext } from '../contexts/portal-context';
 import { motion } from 'framer-motion';
 import {
-  listItemVariants,
-  listVariants,
-} from '../animation/list-animation-vertical';
+  getListItemVariants,
+  getListVariants,
+} from '../animation/list-animation';
 
 const Profile = () => {
   const user = useAppSelector((state) => state.user.user);
@@ -248,12 +248,12 @@ const Profile = () => {
               !getViewedBooksRequestLoading &&
               booksData.length > 0 && (
                 <motion.div
-                  variants={listVariants}
+                  variants={getListVariants(0.2)}
                   initial="hidden"
                   animate="visible"
                 >
                   {booksData.map((currentBook) => (
-                    <motion.div variants={listItemVariants}>
+                    <motion.div variants={getListItemVariants(30)}>
                       <BookDetailsSearch
                         key={currentBook.id}
                         {...currentBook}

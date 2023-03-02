@@ -5,7 +5,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 300px;
+  height: 180px;
   .book_container {
     cursor: pointer;
     position: relative;
@@ -18,14 +18,14 @@
     .container_title {
       position: absolute;
       left: 10px;
-      top: 10px;
+      top: 5px;
       color: #e32652;
-      font-size: 24px;
+      font-size: 16px;
     }
     .book_details {
       text-align: center;
       .book_title {
-        font-size: 40px;
+        font-size: 28px;
         font-weight: bold;
         color: #fff;
         margin-bottom: 20px;
@@ -46,11 +46,14 @@
 
 @media screen and (min-width: 421px) and (max-width: 700px) {
   .container {
-    height: 350px;
+    height: 200px;
     .book_container {
+      .container_title {
+        font-size: 18px;
+      }
       .book_details {
         .book_title {
-          font-size: 48px;
+          font-size: 40px;
           margin-bottom: 30px;
         }
         .authors {
@@ -64,14 +67,15 @@
 }
 @media screen and (min-width: 701px) {
   .container {
+    height: 240px;
     .book_container {
       .container_title {
-        font-size: 32px;
+        font-size: 20px;
       }
       .book_details {
         .book_title {
-          font-size: 56px;
-          margin-bottom: 40px;
+          font-size: 48px;
+          margin-bottom: 20px;
         }
         .authors {
           .author {

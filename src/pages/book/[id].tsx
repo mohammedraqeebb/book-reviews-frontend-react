@@ -42,6 +42,11 @@ import { Link, useParams } from 'react-router-dom';
 import RatingPost from '../../components/rating-post/rating-post.component';
 import BookDetailsPageSkeleton from '../../components/book-details-page-skeleton.component copy';
 import { usePortalContext } from '../../contexts/portal-context';
+import { motion } from 'framer-motion';
+import {
+  getListItemVariants,
+  getListVariants,
+} from '../../animation/list-animation';
 
 //@ts-ignore
 type User = {
@@ -438,12 +443,33 @@ const BookDetails = () => {
               .split(' ')
               .join('_')}`}
           >
-            <h4 className={styles.book_name}>{name}</h4>
-            <h5 className={styles.book_author}>{authors[0].name}</h5>
+            <motion.h4
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 0 }}
+              className={styles.book_name}
+            >
+              {name}
+            </motion.h4>
+            <motion.h5
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 0 }}
+              className={styles.book_author}
+            >
+              {authors[0].name}
+            </motion.h5>
           </div>
           <div className={styles.book_info}>
             <div className={styles.name_and_icon_container}>
-              <h4 className={styles.book_name}>{name}</h4>
+              <motion.h4
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 0 }}
+                className={styles.book_name}
+              >
+                {name}
+              </motion.h4>
               <span className={styles.saved_icon}>
                 {!isBookSaved ? (
                   <span onClick={handleSave}>
@@ -490,28 +516,49 @@ const BookDetails = () => {
               {convertToWordedDate(dateOfRelease)}
             </p>
 
-            <div className={styles.user_reactions_container}>
-              <span className={styles.view_container}>
+            <motion.div
+              variants={getListVariants(0.3)}
+              initial="hidden"
+              animate="visible"
+              className={styles.user_reactions_container}
+            >
+              <motion.span
+                variants={getListItemVariants(30, true)}
+                className={styles.view_container}
+              >
                 <AiFillEye size={20} />
                 <p>{roundOffNumber(views)}</p>
-              </span>
-              <span className={styles.like_container}>
+              </motion.span>
+              <motion.span
+                variants={getListItemVariants(30, true)}
+                initial="hidden"
+                animate="visible"
+                className={styles.like_container}
+              >
                 {likeState.liked ? (
                   <AiFillLike onClick={removeLikeEvent} size={20} />
                 ) : (
                   <AiOutlineLike onClick={clickLikeEvent} size={20} />
                 )}
                 <p>{roundOffNumber(likeState.numberOfLikes)}</p>
-              </span>
-              <span className={styles.dislike_container}>
+              </motion.span>
+              <motion.span
+                variants={getListItemVariants(30, true)}
+                initial="hidden"
+                animate="visible"
+                className={styles.dislike_container}
+              >
                 {likeState.disliked ? (
                   <AiFillDislike size={20} onClick={removeDislikeEvent} />
                 ) : (
                   <AiOutlineDislike size={20} onClick={clickDislikeEvent} />
                 )}
                 <p>{roundOffNumber(likeState.numberOfDislikes)}</p>
-              </span>
-              <span
+              </motion.span>
+              <motion.span
+                variants={getListItemVariants(30, true)}
+                initial="hidden"
+                animate="visible"
                 onClick={() => setShowRatingPost(true)}
                 style={{ flexShrink: 0 }}
                 className={styles.rating_container}
@@ -523,9 +570,16 @@ const BookDetails = () => {
                 )}
 
                 <p>{`${getAverageRating(ratings)}/ 10`}</p>
-              </span>
-            </div>
-            <p className={styles.about_container}>{about}</p>
+              </motion.span>
+            </motion.div>
+            <motion.p
+              initial={{ opacity: 0, y: -5 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 0 }}
+              className={styles.about_container}
+            >
+              {about}
+            </motion.p>
           </div>
         </div>
 
