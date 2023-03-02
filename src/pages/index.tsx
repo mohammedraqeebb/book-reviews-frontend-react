@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 import { useEffect, useState } from 'react';
+import BooksCarousel from '../components/books-slider/books-slider';
 
 import BooksList from '../components/books-list/books-list.component';
 import ErrorComponent from '../components/error.component';
@@ -11,6 +12,7 @@ import useRequest from '../hooks/use-request';
 import { BACKEND_URL } from '../main';
 import styles from '../styles/Home.module.scss';
 import { Book } from './search';
+import BookSlider from '../components/books-slider/books-slider';
 
 const Home = () => {
   const [mostLikedBooks, setMostLikedBooks] = useState<Book[]>([]);
@@ -58,10 +60,12 @@ const Home = () => {
       </div>
     );
   }
+
   return (
     <>
       <div className={styles.home_page_wrapper}>
         <div className={styles.home_page_container}>
+          <BookSlider books={mostViewedBooks.slice(0, 5)} />
           {getMostLikedBooksRequestErrors && (
             <ErrorComponent errors={getMostLikedBooksRequestErrors} />
           )}

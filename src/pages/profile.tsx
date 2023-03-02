@@ -23,6 +23,11 @@ import { CircularProgress } from '@mui/material';
 import ErrorComponent from '../components/error.component';
 import useUser from '../hooks/use-user';
 import { usePortalContext } from '../contexts/portal-context';
+import { motion } from 'framer-motion';
+import {
+  listItemVariants,
+  listVariants,
+} from '../animation/list-animation-vertical';
 
 const Profile = () => {
   const user = useAppSelector((state) => state.user.user);
@@ -241,10 +246,22 @@ const Profile = () => {
             )}
             {!getLikedBooksRequestLoading &&
               !getViewedBooksRequestLoading &&
-              booksData.length > 0 &&
-              booksData.map((currentBook) => (
-                <BookDetailsSearch key={currentBook.id} {...currentBook} />
-              ))}
+              booksData.length > 0 && (
+                <motion.div
+                  variants={listVariants}
+                  initial="hidden"
+                  animate="visible"
+                >
+                  {booksData.map((currentBook) => (
+                    <motion.div variants={listItemVariants}>
+                      <BookDetailsSearch
+                        key={currentBook.id}
+                        {...currentBook}
+                      />
+                    </motion.div>
+                  ))}
+                </motion.div>
+              )}
           </div>
         </div>
       </div>

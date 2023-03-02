@@ -1,6 +1,7 @@
 @import '../../partials/variables';
 
 .book_cover_wrapper {
+  margin-top: 10px;
   cursor: pointer;
   height: 26rem;
   width: 13rem;
@@ -9,6 +10,7 @@
   align-items: center;
   border: 1px solid $color_neutral_700;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 2px 4px;
+  border-radius: 3px;
   .book_cover_container {
     height: 25rem;
     width: 13rem;

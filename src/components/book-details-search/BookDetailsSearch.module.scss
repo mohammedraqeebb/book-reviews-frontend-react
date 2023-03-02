@@ -8,6 +8,7 @@
   border-bottom: 1px solid $color_neutral_400;
   display: flex;
   gap: 2rem;
+
   .book_cover {
     height: 100%;
     width: 70px;
@@ -18,6 +19,7 @@
     flex-direction: column;
     gap: 0.5rem;
     padding: 0.5rem;
+    border-radius: 2px;
 
     .book_name {
       color: white;
