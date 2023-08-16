@@ -8,8 +8,7 @@ import '../src/styles/globals.scss';
 
 import { PortalProvider } from './contexts/portal-context';
 
-export const BACKEND_URL =
-  'https://book-reviews-backend-latest.onrender.com/api';
+export const BACKEND_URL = 'https://book-reviews-backend-tlw2.onrender.com';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
